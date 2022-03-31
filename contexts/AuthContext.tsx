@@ -52,14 +52,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
       setCookie(undefined, "ignite-next-auth.token", token, {
         // max time for the cookie
-        maxAge: 60 * 60 * 24 * 30, // 1 month
+        maxAge: 60 * 60 * 24 * 30, // 30 days
         // which paths have access to the cookie
         path: "/",
       });
 
       setCookie(undefined, "ignite-next-auth.refreshToken", refreshToken, {
         // max time for the cookie
-        maxAge: 60 * 60 * 24 * 30, // 1 month
+        maxAge: 60 * 60 * 24 * 30, // 30 days
         // which paths have access to the cookie
         path: "/",
       });
