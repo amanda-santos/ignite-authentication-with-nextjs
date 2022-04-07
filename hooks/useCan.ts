@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { validateUserPermissions } from "../utils/validateUserPermissions";
 
 type UseCanParams = {
   permissions?: string[];
@@ -13,23 +14,11 @@ export const useCan = ({ permissions, roles }: UseCanParams) => {
     return false;
   }
 
-  if (permissions?.length > 0) {
-    const hasAllPermissions = permissions.every((permission) =>
-      user.permissions.includes(permission)
-    );
+  const userHasValidPermissions = validateUserPermissions({
+    user,
+    permissions,
+    roles,
+  });
 
-    if (!hasAllPermissions) {
-      return false;
-    }
-  }
-
-  if (roles?.length > 0) {
-    const hasAllRoles = roles.every((role) => user.roles.includes(role));
-
-    if (!hasAllRoles) {
-      return false;
-    }
-  }
-
-  return true;
+  return userHasValidPermissions;
 };
